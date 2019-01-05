@@ -1,0 +1,15 @@
+{% extends "student_app/base.html" %}
+{% block body-block %}
+
+<div class="jumbotron">
+  <h2>Please Enter the School</h2>
+
+<form  method="post">
+  {%csrf_token%}
+  {% School_Form %}
+  <input type="submit"  value="submit">
+
+</form>
+</div>
+
+{%endblock%}

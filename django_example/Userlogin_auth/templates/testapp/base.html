@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'index'%}">Al Bela</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+      {% if user.is_authenticated %}
+
+      <li class="active"><a href="{% url 'index'%}">Home</a></li>
+      <li><a href="{% url 'admin:index' %}">Admin</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+
+      <div class="dropdown">
+           <button class="dropbtn" onclick="myFunction()">{{user.username}}<i class="fa fa-caret-down"></i>
+            </button>
+         <div class="dropdown-content" id="myDropdown">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+       </div>
+
+
+
+      {% else %}
+      <li><a href="{% url 'testapp:user_login' %}">log in</a></li>
+      <li><a href="{% url 'testapp:register'%}">Registration</a></li>
+
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  {% block body_block%}
+
+  {% endblock %}
+
+</div>
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+
+    <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+      if (!e.target.matches('.dropbtn')) {
+        var myDropdown = document.getElementById("myDropdown");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
+      }
+    }
+    </script>
+
+  </body>
+</html>
